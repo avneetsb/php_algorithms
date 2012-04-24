@@ -27,9 +27,3 @@ function my_sqrt($n) {
 	return $x;
 }
 
-var_dump(my_sqrt(2));
-var_dump(my_sqrt(4));
-var_dump(my_sqrt(9));
-var_dump(my_sqrt(16));
-var_dump(my_sqrt(25));
-var_dump(my_sqrt(10));
