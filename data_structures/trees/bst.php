@@ -34,36 +34,35 @@ class BinarySearchTree {
  	public function insert($n, $parent = null) {
  		if ($parent == null) {
 			// There's no root, so the inserted element will be the root
- 			if ($this->root == null) {
- 				$this->root = new Node($n);
- 				return;
- 			}
- 			$parent = $this->root;
- 		}
+			if ($this->root == null) {
+				$this->root = new Node($n);
+				return;
+			}
+			$parent = $this->root;
+		}
+		if ($n < $parent->value) {
+			if ($parent->left != null) {
+				$this->insert($n, $parent->left);
+			} else {
+				$parent->left = new Node($n);
+			}
+		} else {
+			if ($parent->right != null) {
+				$this->insert($n, $parent->right);
+			} else {
+				$parent->right = new Node($n);
+			}
+		}
+	}
 
- 		if ($n < $parent->value) {
- 			if ($parent->left != null) {
- 				$this->insert($n, $parent->left);
- 			} else {
- 				$parent->left = new Node($n);
- 			}
- 		} else {
- 			if ($parent->right != null) {
- 				$this->insert($n, $parent->right);
- 			} else {
- 				$parent->right = new Node($n);
- 			}
- 		}
- 	}
-
- 	public function sortedElements() {
+	public function sortedElements() {
 		$elements = array();
 		$this->dfs($this->root, function ($n) use (&$elements) { array_push($elements, $n); });
 
- 		return $elements;
- 	}
+		return $elements;
+	}
 
-	private function dfs($root, $callback) {
+	public function dfs($root, $callback) {
 		if ($root == null) return;
 		$this->dfs($root->left, $callback);
 		$callback($root->value);
@@ -71,9 +70,23 @@ class BinarySearchTree {
 
  	}
 
- 	public function getRoot() {
- 		return $this->root;
- 	}
+	public function bfs($root, $callback) {
+		$queue = new SPLQueue();
+		$queue->enqueue($root);
+
+		while (!$queue->isEmpty()) {
+			$item = $queue->dequeue();
+			$callback($item->value);
+			if ($item->left)
+				$item->enqueue($item->left);
+			if ($item->right)
+				$item->enqueue($item->right);
+		}
+	}
+
+	public function getRoot() {
+		return $this->root;
+	}
 
 }
 
