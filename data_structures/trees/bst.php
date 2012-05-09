@@ -78,9 +78,9 @@ class BinarySearchTree {
 			$item = $queue->dequeue();
 			$callback($item->value);
 			if ($item->left)
-				$item->enqueue($item->left);
+				$queue->enqueue($item->left);
 			if ($item->right)
-				$item->enqueue($item->right);
+				$queue->enqueue($item->right);
 		}
 	}
 
