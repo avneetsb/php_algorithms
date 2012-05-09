@@ -57,17 +57,17 @@ class BinarySearchTree {
  	}
 
  	public function sortedElements() {
- 		$elements = array();
- 		$this->dfs($this->root, $elements);
+		$elements = array();
+		$this->dfs($this->root, function ($n) use (&$elements) { array_push($elements, $n); });
 
  		return $elements;
  	}
 
- 	private function dfs($root, &$elements) {
- 		if ($root == null) return;
- 		$this->dfs($root->left, $elements);
- 		array_push($elements, $root->value);
- 		$this->dfs($root->right, $elements);
+	private function dfs($root, $callback) {
+		if ($root == null) return;
+		$this->dfs($root->left, $callback);
+		$callback($root->value);
+		$this->dfs($root->right, $callback);
 
  	}
 
