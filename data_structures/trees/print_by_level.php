@@ -17,28 +17,18 @@
  * @author Felipe Ribeiro <felipernb@gmail.com>
  */
 
-/**
- * Class that represents a node of the tree
- */
-class Node {
-	public $value;
-	public $left;
-	public $right;
-	public $level;
-	public function __construct($n) {
-		$this->value = $n;
-	}
-}
-
+require 'bst.php';
 /**
  * Use BFS to traverse the tree printing every level with an end-of-line after each one
  */
-function printByLevel(Node $n) {
+function printByLevel(BinarySearchTree $tree) {
+
+	$root = $tree->getRoot();
 	$queue = new SPLQueue();
-	$queue->enqueue($n);
+	$queue->enqueue($root);
 	$currentLevel = 0;
-	$n->level = $currentLevel;
-	$root = $n;
+	$root->level = $currentLevel;
+	$root = $root;
 
 	while (!$queue->isEmpty()) {
 		$item = $queue->dequeue();
@@ -68,12 +58,13 @@ function printByLevel(Node $n) {
  *   3      8
  * 2   4  7   9
  */
-$root = new Node(5);
-$root->left = new Node(3);
-$root->right = new Node(8);
-$root->left->left = new Node(2);
-$root->left->right = new Node(4);
-$root->right->left = new Node(7);
-$root->right->right = new Node(9);
+$tree = new BinarySearchTree();
+$tree->insert(5);
+$tree->insert(3);
+$tree->insert(8);
+$tree->insert(2);
+$tree->insert(4);
+$tree->insert(7);
+$tree->insert(9);
 
-printByLevel($root);
+printByLevel($tree);
