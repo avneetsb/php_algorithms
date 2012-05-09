@@ -49,10 +49,14 @@ function reverse_linked_list1(Node $n) {
 	if (!$n->next) {
 		return $n;
 	}
+	// (n)->(next)->(next.next)->...
 	$next = $n->next;
 	$newHead = reverse_linked_list1($next);
+	// (n) (next)<-(next.next)<-...<-(newHead)
 	$next->next = $n;
+	// (n)<-(next)<-(next.next)<-...<-(newHead)
 	$n->next = null;
+	// .<-(n)<-(next)<-(next.next)<-...<-(newHead)
 	return $newHead;
 }
 
@@ -61,13 +65,17 @@ function reverse_linked_list1(Node $n) {
  * @author Felipe Ribeiro <felipernb@gmail.com>
  */
 function reverse_linked_list2(Node $n) {
+	//(n)->(next)->...
 	$next = $n->next;
 	$n->next = null;
 	while($next != null) {
 		$tmp = $next->next;
+		//...<-(n) (next)->(tmp)->... 
 		$next->next = $n;
+		//...<-(n)<-(next) (tmp)->... 
 		$n = $next;
-		$next = $tmp;	
+		$next = $tmp;
+		//...<-(n') (next')->(tmp')->...
 	}
 	return $n; //new head
 }
