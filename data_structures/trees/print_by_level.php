@@ -28,7 +28,6 @@ function printByLevel(BinarySearchTree $tree) {
 	$queue->enqueue($root);
 	$currentLevel = 0;
 	$root->level = $currentLevel;
-	$root = $root;
 
 	while (!$queue->isEmpty()) {
 		$item = $queue->dequeue();

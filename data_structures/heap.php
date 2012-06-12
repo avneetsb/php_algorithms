@@ -10,7 +10,7 @@
 abstract class Heap {
 	protected $elements = array();
 	protected $n = 0;
-	
+
 	/**
 	 * Inserts a value to the heap, keeping the heap property
 	 * 
@@ -37,7 +37,7 @@ abstract class Heap {
 		$this->siftDown();
 		return $element;
 	}
-	
+
 	/**
 	 * Rearranges the heap after an extraction to keep the heap property
 	 *
@@ -55,6 +55,18 @@ abstract class Heap {
 		$this->elements[$x] = $this->elements[$y];
 		$this->elements[$y] = $tmp;
 	}
+
+	/**
+	 * Compares two elements X and Y
+	 * Returns:
+	 *	0 if they are equal
+	 *	1 if X > Y
+	 *	-1 if X < Y
+	 */
+	protected function compare($x, $y) {
+		if ($x === $y) return 0;
+		return ($x > $y ? 1 : +1);
+	}		
 }
 
 class MaxHeap extends Heap {
