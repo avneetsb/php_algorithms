@@ -59,8 +59,9 @@ class HuffmanCode {
 	}
 
 	public function buildTree() {
-		
+
 		$chars = count_chars($this->text, 1);
+
 		$priorityQueue = new MinHeapPriorityQueue();
 
 		foreach ($chars as $c => $freq) {
@@ -72,9 +73,9 @@ class HuffmanCode {
 
 		while ($priorityQueue->count() > 1) {
 			$internalNode = new Node;
-			$internalNode->left = $priorityQueue->extract();
 			$internalNode->right = $priorityQueue->extract();
-			$internalNode->weight = $internalNode->left->weight + $internalNode->right->weight; 
+			$internalNode->left = $priorityQueue->extract();
+			$internalNode->weight = $internalNode->left->weight + $internalNode->right->weight;
 
 			$priorityQueue->insert($internalNode, $internalNode->weight);
 		}
@@ -104,6 +105,5 @@ class HuffmanCode {
 	}
 
 }
-$huffman = new HuffmanCode("j'aime aller sur le bord de l'eau les jeudis ou les jours impairs");
-printByLevel($huffman->buildTree());
+$huffman = new HuffmanCode("this is an example of a huffman tree");
 var_dump($huffman->generateTable());

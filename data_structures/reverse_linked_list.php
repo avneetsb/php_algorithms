@@ -41,7 +41,7 @@ function reverse_linked_list0(Node $n) {
 	return $head;
 }
 
-/** 
+/**
  * Using recursion, O(n) in time and O(n) in space due to the call stack
  * @author Felipe Ribeiro <felipernb@gmail.com>
  */
@@ -71,9 +71,9 @@ function reverse_linked_list2(Node $n) {
 	//(n) (next)->...
 	while($next != null) {
 		$tmp = $next->next;
-		//...<-(n) (next)->(tmp)->... 
+		//...<-(n) (next)->(tmp)->...
 		$next->next = $n;
-		//...<-(n)<-(next) (tmp)->... 
+		//...<-(n)<-(next) (tmp)->...
 		$n = $next;
 		$next = $tmp;
 		//...<-(n') (next')->(tmp')->...
